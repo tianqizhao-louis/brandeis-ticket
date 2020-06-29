@@ -12,7 +12,7 @@ const auth = require('./config/auth.js');
 //Created mongolab-amorphous-35976 as MONGODB_URI
 const mongoose = require( 'mongoose' );
 //mongoose.connect( `mongodb+srv://${auth.atlasAuth.username}:${auth.atlasAuth.password}@cluster0-yjamu.mongodb.net/authdemo?retryWrites=true&w=majority`);
-mongoose.connect( 'mongodb://localhost/authDemo');
+mongoose.connect( 'mongodb://admin:mypwd@localhost:27017/authDemo', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
 //const mongoDB_URI = process.env.MONGODB_URI
 //mongoose.connect(mongoDB_URI)
 const db = mongoose.connection;
