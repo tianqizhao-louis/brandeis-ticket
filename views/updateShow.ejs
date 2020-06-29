@@ -1,0 +1,25 @@
+<div>
+    <h3><a class="btn btn-secondary" href="/addShow"><i class="fa fa-plus"></i> Create New</a> Show</h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Show Name</th>
+            <th>Poster</th>
+            <th>View Show</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% list.forEach(show => { %>
+            <tr>
+                <td><%= show.showname %></td>
+                <td><img src="<%= show.showpicurl %>" alt ="show poster"/> </td>
+                <td><a href="#">View Show</a></td>
+                <td>
+                    <a href="./addShow/<%= show._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                    <a href="./addShow/delete/<%= show._id %>" onclick="return confirm('Are you sure to delete the record of this show ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+</div>

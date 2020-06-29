@@ -8,13 +8,15 @@ const logger = require('morgan');
 const cors = require('cors');
 const layouts = require("express-ejs-layouts");
 const auth = require('./config/auth.js');
+const bodyParser = require('body-parser');
 
 //Created mongolab-amorphous-35976 as MONGODB_URI
 const mongoose = require( 'mongoose' );
 //mongoose.connect( `mongodb+srv://${auth.atlasAuth.username}:${auth.atlasAuth.password}@cluster0-yjamu.mongodb.net/authdemo?retryWrites=true&w=majority`);
-mongoose.connect( 'mongodb://admin:mypwd@localhost:27017/ticketing', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
-//const mongoDB_URI = process.env.MONGODB_URI
-//mongoose.connect(mongoDB_URI)
+//mongoose.connect( 'mongodb://admin:mypwd@localhost:27017/ticketing', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
+mongoose.connect( 'mongodb://localhost:27017/ticketing', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
+//const mongoDB_URI = process.env.MONGODB_URI .
+//mongoose.connect(mongoDB_URI)m
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -30,7 +32,7 @@ const dbRouter = require('./routes/db');
 const toDoRouter = require('./routes/todo');
 const toDoAjaxRouter = require('./routes/todoAjax');
 const showRouter = require('./routes/showAdding');
-
+const Show = require('./models/Show');
 
 
 const app = express();
@@ -48,6 +50,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 app.use(authRouter)
 app.use(loggingRouter);
 app.use('/', indexRouter);
@@ -62,6 +67,25 @@ app.use('/addShow', showRouter);
 app.get('/addShow', (req, res) => {
     res.render('addShow');
 });
+app.get('/updateShow', (req, res) => {
+    Show.find((err, docs) => {
+        if(!err){
+            res.render('updateShow', {
+                list: docs
+            })
+        }else{
+            console.log('Error in retrieving show list: ' + err);
+        }
+    });
+});
+app.get('/individualShow/:id', (req, res) => {
+    Show.findById(req.params.id, (err, doc) => {
+        res.render('individualShow', {
+            individualShow: doc
+        })
+    });
+});
+
 
 app.get('/profiles',
     isLoggedIn,

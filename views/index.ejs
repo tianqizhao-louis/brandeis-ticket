@@ -15,5 +15,22 @@
   </div>
 
   <div>
-
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Show Name</th>
+        <th>Poster</th>
+        <th>View Show</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% list.forEach(show => { %>
+      <tr>
+        <td><%= show.showname %></td>
+        <td><img src="<%= show.showpicurl %>" alt ="show poster"/> </td>
+        <td><a href="./individualShow/<%= show._id %>">View Show</a></td>
+      </tr>
+      <% }) %>
+      </tbody>
+    </table>
   </div>

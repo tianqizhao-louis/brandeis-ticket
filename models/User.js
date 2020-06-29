@@ -4,14 +4,12 @@ const Schema = mongoose.Schema;
 
 //var userSchema = mongoose.Schema( {any:{}})
 
-var userSchema = Schema( {
+var userSchema = Schema({
     googleid: String,
     googletoken: String,
     googlename:String,
     googleemail:String,
-    username:String,
-    age:Number,
-    imageURL: String,
-} );
+    cart:[String]
+});
 
-module.exports = mongoose.model( 'User', userSchema );
+module.exports = mongoose.model( 'User', userSchema, "userCollection");

@@ -1,36 +1,43 @@
 <div>
-    <form action = 'addShow' method="post" autocomplete="off">
-        <input type="hidden" name="_id"">
+    <form action = '/addShow' method="post" autocomplete="off">
+        <input type="hidden" name="_id", value="<%= updateShow._id %>">
         <div class = "form-group">
             <label>Show Name:</label>
-            <input type = "text" class = "form-control" name="showname", placeholder="Show Name"">
+            <input type = "text" class = "form-control" name="showname", placeholder="Show Name", value="<%= updateShow.showname %>">
+            <div class = "text-danger"><%= updateShow.shownameError %></div>
         </div>
         <div class = "form-group">
             <label>Director:</label>
-            <input type = "text" class = "form-control" name="director", placeholder="Director"">
+            <input type = "text" class = "form-control" name="director", placeholder="Director", value="<%= updateShow.director %>">
+            <div class = "text-danger"><%= updateShow.directorError %></div>
         </div>
         <div class = "form-group">
             <label>Show time:</label>
-            <input type = "text" class = "form-control" name="showtime", placeholder="Show Time"">
+            <input type = "text" class = "form-control" name="showtime", placeholder="Show Time", value="<%= updateShow.showtime %>">
+            <div class = "text-danger"><%= updateShow.showtimeError %></div>
         </div>
         <div class = "form-group">
             <label>Show Location:</label>
-            <input type = "text" class = "form-control" name="showlocation", placeholder="Show Location">
+            <input type = "text" class = "form-control" name="showlocation", placeholder="Show Location", value="<%= updateShow.showlocation %>">
+            <div class = "text-danger"><%= updateShow.showlocationError %></div>
         </div>
         <div class = "form-group">
             <label>Show Description:</label>
-            <input type = "text" class = "form-control" name="showdescription", placeholder="Show Description"">
+            <input type = "text" class = "form-control" name="showdescription", placeholder="Show Description", value="<%= updateShow.showdescription %>">
+            <div class = "text-danger"><%= updateShow.showdescriptionError %></div>
         </div>
         <div class = "form-group">
             <label>Show Pic Url:</label>
-            <input type = "text" class = "form-control" name="showpicurl", placeholder="Show Pic Url">
+            <input type = "text" class = "form-control" name="showpicurl", placeholder="Show Pic Url", value="<%= updateShow.showpicurl %>">
+            <div class = "text-danger"><%= updateShow.showpicurlError %></div>
         </div>
         <div class = "form-group">
             <label>Available Tickets:</label>
-            <input type = "text" class = "form-control" name="availabletickets", placeholder="Available Tickets">
+            <input type = "text" class = "form-control" name="availabletickets", placeholder="Available Tickets", value="<%= updateShow.availabletickets %>">
+            <div class = "text-danger"><%= updateShow.availableticketsError %></div>
+        </div>
+        <div class = "form-group">
+            <button type = "submit" class = "btn btn-info"><i class = "fa fa-database"></i> Submit</button>
         </div>
     </form>
-    <div class = "form-group">
-        <button type = "submit" class = "btn btn-info"><i class = "fa fa-database"></i> Submit</button>
-    </div>
 </div>

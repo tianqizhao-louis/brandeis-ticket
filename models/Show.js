@@ -3,13 +3,13 @@ const mongoose = require( 'mongoose' );
 const Schema = mongoose.Schema;
 
 var showSchema = Schema({
-    showname: String,
-    director: String,
-    showtime: String,
-    showlocation: String,
-    showdescription: String,
-    showpicurl: String,
-    availabletickets: Number
+    showname: {type: String, required: "This field is required."},
+    director: {type: String, required: "This field is required."},
+    showtime: {type: String, required: "This field is required."},
+    showlocation: {type: String, required: "This field is required."},
+    showdescription: {type: String, required: "This field is required."},
+    showpicurl: {type: String, required: "This field is required."},
+    availabletickets: {type: Number, required: "This field is required."}
 });
 
 module.exports = mongoose.model( 'Show', showSchema, "showcollection");
