@@ -27,6 +27,7 @@ function insertRecord(req, res){
     newShow.showdescription = req.body.showdescription;
     newShow.showpicurl = req.body.showpicurl;
     newShow.availabletickets = req.body.availabletickets;
+    newShow.price = req.body.price;
 
     newShow.save((err, doc) => {
         if(!err){
@@ -79,6 +80,9 @@ function handleValidationError(err, body) {
                 break;
             case 'availabletickets':
                 body['availableticketsError'] = err.errors[field].message;
+                break;
+            case 'price':
+                body['priceError'] = err.errors[field].message;
                 break;
             default:
                 break;

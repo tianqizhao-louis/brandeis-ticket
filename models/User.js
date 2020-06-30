@@ -9,7 +9,8 @@ var userSchema = Schema({
     googletoken: String,
     googlename:String,
     googleemail:String,
-    cart:[String]
+    cart: [String],
+    confirmed: [String]
 });
 
 module.exports = mongoose.model( 'User', userSchema, "userCollection");

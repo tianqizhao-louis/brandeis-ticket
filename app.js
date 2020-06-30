@@ -33,6 +33,7 @@ const toDoRouter = require('./routes/todo');
 const toDoAjaxRouter = require('./routes/todoAjax');
 const showRouter = require('./routes/showAdding');
 const Show = require('./models/Show');
+const cartRouter = require('./routes/cart');
 
 
 const app = express();
@@ -86,6 +87,7 @@ app.get('/individualShow/:id', (req, res) => {
     });
 });
 
+app.use('/addToCart', cartRouter);
 
 app.get('/profiles',
     isLoggedIn,
@@ -99,7 +101,6 @@ app.get('/profiles',
         }
     }
 )
-
 app.use('/publicprofile/:userId',
     async (req,res,next) => {
         try {

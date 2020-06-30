@@ -1,4 +1,15 @@
 <div>
-    <h1>Show Name: <%= individualShow.showname %></h1>
-    <h1>Director: <%= individualShow.director %></h1>
+    <img src="<%= individualShow.showpicurl %>" alt = "show poster"/>
+    <h3><%= individualShow.showname %></h3>
+    <h5>Director: <%= individualShow.director %></h5>
+    <h5>Show time</h5>
+    <p><%= individualShow.showtime %></p>
+    <h5>Show location</h5>
+    <p><%= individualShow.showlocation %></p>
+    <a href="/addToCart/<%=individualShow._id%>"><button class = "btn btn-info"><i class = "fa fa-database"></i> Add to Cart</button></a>
+
+    <h6>Available Tickets: <%= individualShow.availabletickets %></h6>
+    <h6>Price: $ <%= individualShow.price %></h6>
+    <h5>Show Description</h5>
+    <p><%= individualShow.showdescription %></p>
 </div>
