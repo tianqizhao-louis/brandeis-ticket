@@ -13,8 +13,8 @@ const bodyParser = require('body-parser');
 //Created mongolab-amorphous-35976 as MONGODB_URI
 const mongoose = require( 'mongoose' );
 //mongoose.connect( `mongodb+srv://${auth.atlasAuth.username}:${auth.atlasAuth.password}@cluster0-yjamu.mongodb.net/authdemo?retryWrites=true&w=majority`);
-//mongoose.connect( 'mongodb://admin:mypwd@localhost:27017/ticketing', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
-mongoose.connect( 'mongodb://localhost:27017/ticketing', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
+mongoose.connect( 'mongodb://admin:mypwd@localhost:27017/ticketing', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
+//mongoose.connect( 'mongodb://localhost:27017/ticketing', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
 //const mongoDB_URI = process.env.MONGODB_URI .
 //mongoose.connect(mongoDB_URI)m
 const db = mongoose.connection;
@@ -33,7 +33,8 @@ const toDoRouter = require('./routes/todo');
 const toDoAjaxRouter = require('./routes/todoAjax');
 const showRouter = require('./routes/showAdding');
 const Show = require('./models/Show');
-const cartRouter = require('./routes/cart');
+//const cartRouter = require('./routes/cart');
+var theUser = mongoose.model('User');
 
 
 const app = express();
@@ -87,7 +88,53 @@ app.get('/individualShow/:id', (req, res) => {
     });
 });
 
-app.use('/addToCart', cartRouter);
+//app.use('/addToCart', cartRouter);
+app.get('/yeah', (req, res) => {
+    res.render('yeah');
+});
+
+app.get('/addToCart/:id', (req, res) => {
+    var user = req.user;
+    Show.findById(req.params.id, (err, doc) => {
+        res.render('addToCart', {
+            ind: doc,
+            user: user
+        });
+    });
+});
+
+app.post('/addToCart/add', (req, res, next) => {
+    var numTickets = req.body.numberOfTickets;
+    numTickets = -Math.abs(numTickets);
+    Show.findOneAndUpdate({_id: req.body.showID}, {
+        $inc: {availabletickets: numTickets}
+    }, {new : true}, (err, doc) => {
+        if(!err){
+        }else{
+            console.log(err);
+        }
+    });
+    console.log(req.body.userID);
+    theUser.findOneAndUpdate({_id: req.body.userID}, {
+        $push: {cart: [req.body.showName]}
+    }, {new : true}, (err, doc) => {
+        if(!err){
+
+        }else{
+            console.log(err);
+        }
+    });
+    theUser.findOneAndUpdate({_id: req.body.userID}, {
+        $push: {cartNumber: [req.body.numberOfTickets]}
+    }, {new : true}, (err, doc) => {
+        if(!err){
+            res.redirect('/');
+        }else{
+            console.log(err);
+        }
+    });
+    console.log("updated available tickets and added to cart");
+});
 
 app.get('/profiles',
     isLoggedIn,
@@ -119,8 +166,9 @@ app.use('/publicprofile/:userId',
 app.get('/profile',
     isLoggedIn,
     (req,res) => {
-        res.render('profile')
-    })
+        res.render('profile');
+    });
+
 
 app.get('/editProfile',
     isLoggedIn,

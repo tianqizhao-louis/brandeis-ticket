@@ -11,11 +11,12 @@
         <label>Number of Tickets you want to buy:</label>
         <input type="number" name ="numberOfTickets" value="1">
         <input type="hidden" name ="useremail" value=<%=user.googleemail%>>
-        <input type="hidden" name ="showID" value=<%=ind._id%>>
+        <input type="hidden" name ="showName" value=<%=ind.showname%>>
         <input type="hidden" name ="userID" value=<%=user._id%>>
         <br>
         <button autofocus type="submit">Confirm</button>
     </form>
-    <button>Cancel</button>
+
+    <a href = "./index"><button>Cancel</button></a>
 
 </div>

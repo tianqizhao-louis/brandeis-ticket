@@ -6,7 +6,11 @@
     <p><%= individualShow.showtime %></p>
     <h5>Show location</h5>
     <p><%= individualShow.showlocation %></p>
-    <a href="/addToCart/<%=individualShow._id%>"><button class = "btn btn-info"><i class = "fa fa-database"></i> Add to Cart</button></a>
+    <% if(!loggedIn) {%>
+        <button class = "btn btn-info" disabled><i class = "fa fa-database"></i> You have to log in to add to cart</button>
+    <% } else  { %>
+        <a href="/addToCart/<%=individualShow._id%>"><button class = "btn btn-info"><i class = "fa fa-database"></i> Checkout </button></a>
+    <% } %>
 
     <h6>Available Tickets: <%= individualShow.availabletickets %></h6>
     <h6>Price: $ <%= individualShow.price %></h6>

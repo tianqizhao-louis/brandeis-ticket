@@ -10,7 +10,7 @@ var userSchema = Schema({
     googlename:String,
     googleemail:String,
     cart: [String],
-    confirmed: [String]
+    cartNumber:[Number]
 });
 
 module.exports = mongoose.model( 'User', userSchema, "userCollection");

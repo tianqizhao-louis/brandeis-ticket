@@ -1,28 +1,40 @@
-<div class="jumbotron">
-  <h1>Your Profile</h1>
-  <p> this comes from the google authentication
-      and from the info you provide when you
-      edit this page!
-  </p>
+<div>
+  <h4>Your Cart</h4>
 </div>
-<hr>
-<a href="editProfile">Edit</a>
 <hr>
 <div class="row">
   <div class="col-sm-4">
       <table class="table table-bordered">
         <tbody>
           <tr>
-            <td>googlename</td>
+            <td>Your name</td>
             <td><%= user.googlename %> </td>
           </tr>
           <tr>
-            <td>googleemail</td>
+            <td>Your email</td>
             <td><%= user.googleemail %> </td>
           </tr>
         </tbody>
       </table>
+
   </div>
-  <div class="col-sm-4">
-  </div>
+</div>
+
+<div class="row">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Show Name</th>
+      <th># of Tickets purchased:</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for (var i = 0; i < user.cart.length; i++) { %>
+    <tr>
+      <td><%= user.cart[i] %></td>
+      <td><%= user.cartNumber[i]%></td>
+    </tr>
+    <% } %>
+    </tbody>
+  </table>
 </div>
