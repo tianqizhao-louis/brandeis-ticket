@@ -7,7 +7,15 @@
     <p>Your Name: <%= user.googlename %></p>
     <p>Your Email: <%= user.googleemail %></p>
 
-    <button autofocus>Confirm</button>
+    <form action = '/addToCart/add' method="post" autocomplete="off">
+        <label>Number of Tickets you want to buy:</label>
+        <input type="number" name ="numberOfTickets" value="1">
+        <input type="hidden" name ="useremail" value=<%=user.googleemail%>>
+        <input type="hidden" name ="showID" value=<%=ind._id%>>
+        <input type="hidden" name ="userID" value=<%=user._id%>>
+        <br>
+        <button autofocus type="submit">Confirm</button>
+    </form>
     <button>Cancel</button>
 
 </div>
