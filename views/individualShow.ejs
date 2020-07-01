@@ -1,19 +1,27 @@
 <div>
-    <img src="<%= individualShow.showpicurl %>" alt = "show poster"/>
+    <img src="<%= individualShow.showpicurl %>" alt = "show poster" style="margin-left: auto; margin-right: auto;display: block"/>
+    <br>
     <h3><%= individualShow.showname %></h3>
-    <h5>Director: <%= individualShow.director %></h5>
+    <hr>
+    <h5>Director</h5>
+    <p><%= individualShow.director %></p>
+    <hr>
     <h5>Show time</h5>
     <p><%= individualShow.showtime %></p>
+    <hr>
     <h5>Show location</h5>
     <p><%= individualShow.showlocation %></p>
-    <% if(!loggedIn) {%>
-        <button class = "btn btn-info" disabled><i class = "fa fa-database"></i> You have to log in to add to cart</button>
-    <% } else  { %>
-        <a href="/addToCart/<%=individualShow._id%>"><button class = "btn btn-info"><i class = "fa fa-database"></i> Checkout </button></a>
-    <% } %>
-
-    <h6>Available Tickets: <%= individualShow.availabletickets %></h6>
+    <hr>
+    <h6>Available Tickets: </h6> <p><%= individualShow.availabletickets %></p>
+    <hr>
     <h6>Price: $ <%= individualShow.price %></h6>
+    <hr>
     <h5>Show Description</h5>
     <p><%= individualShow.showdescription %></p>
+    <hr>
+    <% if(!loggedIn) {%>
+        <button class = "btn btn-info" disabled><i class = "fa fa-database"></i> You have to log in to order</button>
+    <% } else  { %>
+    <a href="/addToCart/<%=individualShow._id%>"><button class = "btn btn-info"><i class = "fa fa-database"></i> Checkout </button></a>
+    <% } %>
 </div>

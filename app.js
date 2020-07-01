@@ -13,8 +13,8 @@ const bodyParser = require('body-parser');
 //Created mongolab-amorphous-35976 as MONGODB_URI
 const mongoose = require( 'mongoose' );
 //mongoose.connect( `mongodb+srv://${auth.atlasAuth.username}:${auth.atlasAuth.password}@cluster0-yjamu.mongodb.net/authdemo?retryWrites=true&w=majority`);
-mongoose.connect( 'mongodb://admin:mypwd@localhost:27017/ticketing', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
-//mongoose.connect( 'mongodb://localhost:27017/ticketing', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
+//mongoose.connect( 'mongodb://admin:mypwd@localhost:27017/ticketing', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
+mongoose.connect( 'mongodb://localhost:27017/ticketing', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
 //const mongoDB_URI = process.env.MONGODB_URI .
 //mongoose.connect(mongoDB_URI)m
 const db = mongoose.connection;
@@ -24,7 +24,8 @@ db.once('open', function() {
 });
 
 const authRouter = require('./routes/authentication');
-const isLoggedIn = authRouter.isLoggedIn
+const isLoggedIn = authRouter.isLoggedIn;
+const AdminDB = require("./models/Admin");
 const loggingRouter = require('./routes/logging');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -80,6 +81,7 @@ app.get('/updateShow', (req, res) => {
         }
     });
 });
+
 app.get('/individualShow/:id', (req, res) => {
     Show.findById(req.params.id, (err, doc) => {
         res.render('individualShow', {

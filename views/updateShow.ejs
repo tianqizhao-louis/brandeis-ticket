@@ -11,7 +11,7 @@
         <% list.forEach(show => { %>
             <tr>
                 <td><%= show.showname %></td>
-                <td><img src="<%= show.showpicurl %>" alt ="show poster"/> </td>
+                <td><img src="<%= show.showpicurl %>" style="width:300px; height:400px" alt ="show poster"/> </td>
                 <td>
                     <a href="./addShow/<%= show._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
                     <a href="./addShow/delete/<%= show._id %>" onclick="return confirm('Are you sure to delete the record of this show ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
